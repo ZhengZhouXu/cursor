@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style media="screen">
+    body,html {
+      margin: 0;
+      padding: 0;
+      background-color: #5298C6;
+    }
+    .demo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      color: #FFF;
+      text-align: center;
+    }
+    .title {
+      display: block;
+      font-size: 60px;
+      font-weight: 600;
+    }
+    #cursor {
+
+      font-size: 30px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+    <div class="demo">
+      <span class="title">Cursor.js</span>
+      <span id="cursor"></span>
+    </div>
+
+    <script src="../js/cursor.js" charset="utf-8"></script>
+    <script>
+      window.onload = function () {
+        cursor('cursor', {
+          textArr: [
+            '这是一个插件',
+            '作者：旭旭乐',
+            '可以实现类似打字效果',{
+              text: '只为这样的你：程序猿',
+              back: [{
+                index: 10,
+                text: '媛'
+              },{
+                index: 10,
+                text: '工程师'
+              },{
+                index: 10,
+                text: '攻城狮'
+              },{
+                index: 10,
+                text: '单身狗'
+              },{
+                index: 10,
+                text: '汪'
+              }]
+            }],
+          color: '#fff',
+          height: 35,
+        })
+      }
+    </script>
+</body>
+</html>

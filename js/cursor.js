@@ -20,7 +20,7 @@
     height: 18, // 光标高度，单位/px
     blinkTime: 0.8, // 光标闪烁一次的时间，单位/s
     textArr: [],
-    startMode: 'sub',
+    startMode: 'add',
     subTime: 200,
     addTime: 200,
     spanTime: 1500,
@@ -118,7 +118,7 @@
         }
         el.innerText += text.substr(_addNum++, 1);
 
-        if (_addNum < text.length) {
+        if (_addNum <= text.length) {
           // 增加文字
           add(el);
         } else if(options.textArr[++_index]) {
@@ -171,12 +171,20 @@
           el.innerText = el.innerText.substr(0,elTextLength - ++backNum);
           back();
         } else if(addNum < textLength) {
-          // 增加文字
-          el.innerText += text.substr(addNum++, 1);
-          back();
+          if (addNum === 0) {
+            setTimeout(function () {
+              el.innerText += text.substr(addNum++, 1);
+              back();
+            }, options.spanTime)
+          } else {
+            // 增加文字
+            el.innerText += text.substr(addNum++, 1);
+            back();
+          }
         } else {
           // 继续执行增加
           wait(addFont, options.spanTime, el);
+          // addFont(el);
         }
       }, options.subTime)
     })();
@@ -201,7 +209,7 @@
     console.log(params);
     var el = document.getElementById(elId);
     // 添加样式
-    var cursorStyle = document.createTextNode('div:after{content:"";display:inline-block;width:'+ options.width +'px;height:'+ options.height +'px;vertical-align:bottom;background:' + options.color + ';animation:blink '+ options.blinkTime +'s;animation-iteration-count:infinite;margin-left:3px}@keyframes blink{from{opacity:1}to{opacity:0}}');
+    var cursorStyle = document.createTextNode('div:after{content:"";display:inline-block;width:'+ options.width +'px;height:'+ options.height +'px;vertical-align:bottom;background:' + options.color + ';animation:blink '+ options.blinkTime +'s;animation-iteration-count:infinite;margin-left:2px}@keyframes blink{from{opacity:1}to{opacity:0}}');
     var style = document.createElement('style');
     var head = document.getElementsByTagName('head')[0];
     style.appendChild(cursorStyle);
